@@ -3,6 +3,10 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
+  plugins: [
+    require("tailwindcss-animate"),
+    // ...
+  ],
   theme: {
     screens: {
       sm: '375px',

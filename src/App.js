@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="w-screen h-screen bg-varyLightGray">
       <Navbar />
-      {sidebarShowed ? <Sidebar toggle={() => setShowed(!sidebarShowed)} /> : <></>}
+      <Sidebar toggle={() => setShowed(!sidebarShowed)} visible={sidebarShowed} />
     </div>
 
   );

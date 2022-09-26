@@ -1,10 +1,12 @@
 import React from 'react'
 import HideIcon from "./icons/HideIcon";
 import DashboardIcon from "./icons/DashboardIcon";
+import clsx from 'clsx';
 
-const Sidebar = ({ toggle }) => {
+const Sidebar = ({ visible, toggle }) => {
     const selected = 0
-    return <div className={"flex flex-col align-center border-r  bg-white dark:bg-darkBluePrimary min-h-[calc(100vh-100px)] w-64 lg:w-[300px] pb-10 sm:flex sm:flex-col border-r-lines-light dark:border-r-lines-dark absolute transition-all duration-2000 "}>
+    const cls = clsx("flex flex-col align-center border-r  bg-white dark:bg-darkBluePrimary min-h-[calc(100vh-100px)] w-64", "lg:w-[300px]", visible ? "left-0" : "left-[-300px]", "pb-10 sm:flex sm:flex-col border-r-lines-light dark:border-r-lines-dark absolute transition-all duration-2000")
+    return <div className={cls}>
         {/*TODO: Change font size to very small*/}
         <p className={"text-mediumGrey px-6 py-4 font-bold text-sm"}>ALL BOARDS (2)</p>
 
