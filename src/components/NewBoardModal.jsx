@@ -1,9 +1,17 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../redux/store/ui-slice";
 
 const NewBoardModal = () => {
     const dispatch = useDispatch()
+    const [boardName, setBoardName] = useState("")
+
+    const handleCreateNewBoard = () => {
+        dispatch(uiActions.addBoard({
+            name: boardName
+        }))
+        dispatch(uiActions.hideBoardModal())
+    }
 
     // TODO: Z-index should be changed dynamicaly
     return <div className="absolute flex items-start justify-center top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10"
@@ -14,12 +22,14 @@ const NewBoardModal = () => {
     >
         <div className="w-[500px] min-h-max bg-white m-auto rounded-lg" onClick={(e) => {
             e.stopPropagation()
-            console.log("overload")
         }}>
             <form className="flex flex-col p-5">
                 <div className="font-semibold  text-lg">Add New Board</div>
                 <label htmlFor="board-name" className="mt-5 mb-2 text-sm text-mediumGrey font-semibold">Board Name</label>
-                <input id="board-name" placeholder="e.g Web Design" className="mb-5 peer px-4 py-2 text-black dark:text-white dark:bg-mediumGrey text-sm rounded transition-colors outline outline-1 outline-mediumGrey/25 cursor-pointer hover:outline-purplePrimary focus:outline-purplePrimary placeholder:text-black/25 dark:placeholder:text-white/25" />
+                <input id="board-name" onChange={(e) => {
+                    setBoardName(e.target.value)
+                    console.log(boardName)
+                }} placeholder="e.g Web Design" className="mb-5 peer px-4 py-2 text-black dark:text-white dark:bg-mediumGrey text-sm rounded transition-colors outline outline-1 outline-mediumGrey/25 cursor-pointer hover:outline-purplePrimary focus:outline-purplePrimary placeholder:text-black/25 dark:placeholder:text-white/25" />
 
                 {/* TODO: Retreive board columns from store */}
                 <label htmlFor="board-cols" className="mt-5 mb-2 text-sm text-mediumGrey font-semibold">Board Columns</label>
@@ -33,7 +43,9 @@ const NewBoardModal = () => {
                     <div className="rounded-full bg-purpleLight py-2 px-4 text-center text-purplePrimary font-semibold text-sm cursor-pointer hover:bg-hoverPurple hover:text-white">
                         + Add New Colmun
                     </div>
-                    <div className="rounded-full bg-purplePrimary py-2 px-4 text-center text-white font-semibold text-sm cursor-pointer hover:bg-hoverPurple">
+                    <div
+                        onClick={handleCreateNewBoard}
+                        className="rounded-full bg-purplePrimary py-2 px-4 text-center text-white font-semibold text-sm cursor-pointer hover:bg-hoverPurple">
                         Create New Board
                     </div>
                 </div>

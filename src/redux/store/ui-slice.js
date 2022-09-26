@@ -29,7 +29,7 @@ const uiSlice = createSlice({
         },
         addBoard(state, action) {
             state.boards.push({
-                boardName: "New board here",
+                boardName: action.payload.name,
                 boardColumns: []
             })
         }
