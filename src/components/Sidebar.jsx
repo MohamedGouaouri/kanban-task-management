@@ -12,7 +12,8 @@ const Sidebar = ({ visible, toggle }) => {
 
 
     const handleCreateBoard = () => {
-        dispatch(uiActions.addBoard())
+        // dispatch(uiActions.addBoard())
+        dispatch(uiActions.showCreateBoardModal())
     }
 
     const cls = clsx("flex flex-col align-center border-r  bg-white dark:bg-darkBluePrimary min-h-[calc(100vh-100px)] w-64", "lg:w-[300px]", visible ? "left-0" : "left-[-300px]", "pb-10 sm:flex sm:flex-col border-r-lines-light dark:border-r-lines-dark absolute transition-all duration-2000")

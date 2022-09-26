@@ -4,6 +4,7 @@ const uiSlice = createSlice({
     name: 'ui',
     initialState: {
         sidebarShowed: true,
+        createBoardModalVisible: false,
         selectedBoard: 0,
         boards: [
             {
@@ -19,6 +20,12 @@ const uiSlice = createSlice({
     reducers: {
         toggle(state, action) {
             state.sidebarShowed = !state.sidebarShowed
+        },
+        showCreateBoardModal(state, action) {
+            state.createBoardModalVisible = true
+        },
+        hideBoardModal(state, action) {
+            state.createBoardModalVisible = false
         },
         addBoard(state, action) {
             state.boards.push({
