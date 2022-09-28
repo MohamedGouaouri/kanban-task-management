@@ -22,7 +22,7 @@ const NewTaskModal = () => {
         if (taskName === "") return
         dispatch(uiActions.addTask({
             boardId: selectedBoardId,
-            columnId: 0, // TODO: Change this,
+            columnId: selectedColumn || 0, // TODO: Change this,
             title: taskName,
             description: description,
             subtasks: []
@@ -31,8 +31,7 @@ const NewTaskModal = () => {
 
     }
     const handleSelectColumn = (e) => {
-        // setColumn(e.target.value)
-        // console.log(selectedColumn)
+        setColumn(parseInt(e.target.value))
 
     }
 

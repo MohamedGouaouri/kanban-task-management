@@ -88,11 +88,14 @@ const uiSlice = createSlice({
                 return b.id === boardId
             })
             if (board.length > 0) {
+
                 // find col
                 const column = board[0].boardColumns.filter(col => {
                     return col.id === columnId
                 })
+
                 if (column.length > 0) {
+
                     const taskId = column[0].tasks.length
                     const newTask = {
                         id: taskId,
