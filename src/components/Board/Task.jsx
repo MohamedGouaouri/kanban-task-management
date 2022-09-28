@@ -12,7 +12,7 @@ const Task = ({ task }) => {
             {task["title"]}
         </div>
         <div className="font-semibold text-mediumGrey text-xs">
-            {task.subtasks > 0 ? <>{compeletedSubtasks.length} of {task.subtasks.length} subtasks</> : <>No subtasks</>}
+            {task.subtasks.length > 0 ? <>{compeletedSubtasks.length} of {task.subtasks.length} subtasks</> : <>No subtasks</>}
         </div>
     </div>
 }

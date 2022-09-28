@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../redux/store/ui-slice";
 
@@ -17,6 +17,7 @@ const NewTaskModal = () => {
     const [taskName, setTaskName] = useState("")
     const [description, setDescription] = useState("")
     const [selectedColumn, setColumn] = useState(null)
+    const [subtasks, setSubtasks] = useState([])
 
     const handleCreateNewBoard = () => {
         if (taskName === "") return
@@ -25,7 +26,7 @@ const NewTaskModal = () => {
             columnId: selectedColumn || 0, // TODO: Change this,
             title: taskName,
             description: description,
-            subtasks: []
+            subtasks: subtasks
         }))
         dispatch(uiActions.hideTaskModal())
 
@@ -33,6 +34,17 @@ const NewTaskModal = () => {
     const handleSelectColumn = (e) => {
         setColumn(parseInt(e.target.value))
 
+    }
+
+    const handleAddSubtask = (e) => {
+        const subtask = {
+            id: subtasks.length,
+            title: "",
+            completed: false
+        }
+        const newSubtasks = Array.from(subtasks)
+        newSubtasks.push(subtask)
+        setSubtasks(newSubtasks)
     }
 
     return <div className="absolute flex items-start justify-center top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10"
@@ -53,25 +65,44 @@ const NewTaskModal = () => {
 
 
                 <label className="mb-2 text-sm text-mediumGrey font-semibold">Description</label>
-                <textarea name="Description"
+                <textarea
+                    name="Description"
                     rows="4"
                     id="Description"
                     onChange={(e) => {
                         setDescription(e.target.value)
                     }}
-                    class="resize-none px-4 py-2 text-black dark:text-white dark:bg-dark-grey text-sm rounded transition-colors outline outline-1 outline-mediumGrey/25 cursor-pointer hover:outline-purplePrimary focus:outline-purplePrimary placeholder:text-black/25 dark:placeholder:text-white/25" placeholder="e.g. It’s always good to take a break. This 15 minute break will  recharge the batteries a little." data-dashlane-rid="c5f32712abfd9a03" spellcheck="false" data-form-type="other"></textarea>
+                    class="resize-none px-4 py-2 text-black dark:text-white dark:bg-dark-grey text-sm rounded transition-colors outline outline-1 outline-mediumGrey/25 cursor-pointer hover:outline-purplePrimary focus:outline-purplePrimary placeholder:text-black/25 dark:placeholder:text-white/25" placeholder="e.g. It’s always good to take a break. This 15 minute break will  recharge the batteries a little." spellcheck="false"></textarea>
 
 
 
-                <label htmlFor="board-cols" className="mt-5 mb-2 text-sm text-mediumGrey font-semibold">Subtasks</label>
-                <input id="board-cols" placeholder="e.g Sub1" className=" mb-5 peer px-4 py-2 text-black dark:text-white dark:bg-mediumGrey text-sm rounded transition-colors outline outline-1 outline-mediumGrey/25 cursor-pointer hover:outline-purplePrimary focus:outline-purplePrimary placeholder:text-black/25 dark:placeholder:text-white/25" />
-
-                <input id="board-cols" placeholder="e.g Sub2" className="mb-5 peer px-4 py-2 text-black dark:text-white dark:bg-mediumGrey text-sm rounded transition-colors outline outline-1 outline-mediumGrey/25 cursor-pointer hover:outline-purplePrimary focus:outline-purplePrimary placeholder:text-black/25 dark:placeholder:text-white/25" />
-
-                <input id="board-cols" placeholder="e.g Sub3" className="mb-5 peer px-4 py-2 text-black dark:text-white dark:bg-mediumGrey text-sm rounded transition-colors outline outline-1 outline-mediumGrey/25 cursor-pointer hover:outline-purplePrimary focus:outline-purplePrimary placeholder:text-black/25 dark:placeholder:text-white/25" />
-
+                <label htmlFor="subtasks" className="mt-5 mb-2 text-sm text-mediumGrey font-semibold">Subtasks</label>
+                {subtasks.map((st, idx) => {
+                    return <input
+                        placeholder={`e.g Sub${idx + 1}`}
+                        key={idx}
+                        onChange={(e) => {
+                            // Filter subtask
+                            let subtask = subtasks.filter(st => {
+                                return st.id === idx
+                            })
+                            if (subtask) {
+                                subtask = subtask[0]
+                                subtask.title = e.target.value
+                                setSubtasks(subtasks.map(st => {
+                                    if (st.id === subtask.id) {
+                                        return subtask
+                                    }
+                                    return st
+                                }))
+                            }
+                        }}
+                        className="mb-5 peer px-4 py-2 text-black dark:text-white dark:bg-mediumGrey text-sm rounded transition-colors outline outline-1 outline-mediumGrey/25 cursor-pointer hover:outline-purplePrimary focus:outline-purplePrimary placeholder:text-black/25 dark:placeholder:text-white/25" />
+                })}
                 <div className="flex flex-col justify-between gap-5">
-                    <div className="rounded-full bg-purpleLight py-2 px-4 text-center text-purplePrimary font-semibold text-sm cursor-pointer hover:bg-hoverPurple hover:text-white">
+                    <div
+                        onClick={handleAddSubtask}
+                        className="rounded-full bg-purpleLight py-2 px-4 text-center text-purplePrimary font-semibold text-sm cursor-pointer hover:bg-hoverPurple hover:text-white">
                         + Add New Subtask
                     </div>
                     <div>

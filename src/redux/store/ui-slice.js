@@ -39,11 +39,7 @@ const uiSlice = createSlice({
                                 id: 0,
                                 title: "Build UI for search",
                                 subtasks: [
-                                    {
-                                        id: 0,
-                                        title: "Sub1",
-                                        completed: false
-                                    }
+
                                 ]
                             }
                         ],
