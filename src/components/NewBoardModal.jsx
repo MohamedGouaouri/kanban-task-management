@@ -7,6 +7,7 @@ const NewBoardModal = () => {
     const [boardName, setBoardName] = useState("")
 
     const handleCreateNewBoard = () => {
+        if (boardName === "") return
         dispatch(uiActions.addBoard({
             name: boardName
         }))

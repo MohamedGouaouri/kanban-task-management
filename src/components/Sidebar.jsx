@@ -16,10 +16,10 @@ const Sidebar = ({ visible, toggle }) => {
         dispatch(uiActions.showCreateBoardModal())
     }
 
-    const cls = clsx("flex flex-col align-center border-r  bg-white dark:bg-darkBluePrimary min-h-[calc(100vh-100px)] w-64", "lg:w-[300px]", visible ? "left-0" : "left-[-300px]", "pb-10 sm:flex sm:flex-col border-r-lines-light dark:border-r-lines-dark absolute transition-all duration-2000")
+    const cls = clsx("flex flex-col align-center border-r w-[300px] bg-white dark:bg-darkBluePrimary min-h-[calc(100vh-100px)] w-64", "lg:w-[300px]", visible ? "left-0" : "left-[-300px]", "pb-10 sm:flex sm:flex-col border-r-lines-light dark:border-r-lines-dark absolute transition-all duration-2000")
     return <div className={cls}>
         {/*TODO: Change font size to very small*/}
-        <p className={"text-mediumGrey px-6 py-4 font-bold text-sm"}>ALL BOARDS (2)</p>
+        <p className={"text-mediumGrey px-6 py-4 font-bold text-sm"}>ALL BOARDS ({boards.length})</p>
 
         {boards.map((board, idx) => {
             return <div className={clsx("flex items-center gap-4 w-11/12 rounded-r-full px-6 py-3 cursor-pointer text-white font-bold", selectedBoard === idx ? "bg-purplePrimary hover:bg-hoverPurple" : "text-mediumGrey hover:bg-purpleLight hover:text-purplePrimary")}>

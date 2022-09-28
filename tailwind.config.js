@@ -2,10 +2,13 @@
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/flowbite/**/*.js"
+
   ],
   plugins: [
     require("tailwindcss-animate"),
-    // ...
+    require('flowbite/plugin')
+
   ],
   theme: {
     screens: {
@@ -27,5 +30,5 @@ module.exports = {
 
     },
   },
-  plugins: [],
+
 }
