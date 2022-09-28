@@ -1,16 +1,17 @@
 import clsx from "clsx";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import TaskDetailsModal from "../TaskDetailsModal";
 import Task from "./Task";
 const randomColor = require('randomcolor');
 
 const BoardFlow = ({ boardId, columnId }) => {
-
     const board = useSelector(state => {
         return state.ui.boards.filter(board => {
             return board.id === boardId
         })
     })
+
     const column = board.length >= 0 && board[0].boardColumns.filter(col => {
         return col.id === columnId
     })

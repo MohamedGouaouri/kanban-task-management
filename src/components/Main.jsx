@@ -1,7 +1,9 @@
 import React from "react";
 import BoardFlow from "./Board/BoardFlow";
+import TaskDetailsModal from "./TaskDetailsModal";
 
 const Main = () => {
+
     return <div
         className="relative min-h-[calc(100vh-100px)] max-h-[calc(100vh-100px)] overflow-auto bg-light-grey dark:bg-very-dark-grey transition-all md:translate-x-[300px] lg:translate-x-[300px]"
     >
@@ -11,6 +13,7 @@ const Main = () => {
                 <BoardFlow boardId={0} columnId={1} />
             </div>
         </div>
+
     </div>
 }
 

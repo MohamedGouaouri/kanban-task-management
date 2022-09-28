@@ -8,6 +8,7 @@ const uiSlice = createSlice({
         createBoardModalVisible: false,
         createTaskModalVisible: false,
         selectedBoard: 0,
+        selectedTask: null,
         boards: [
             {
                 id: 0,
@@ -99,6 +100,87 @@ const uiSlice = createSlice({
                         subtasks: action.payload.subtasks
                     }
                     state.boards[boardId].boardColumns[columnId].tasks.push(newTask)
+                }
+            }
+        },
+
+        setSelectedTask(state, action) {
+            // const boardId = action.payload.boardId
+            // const columnId = action.payload.columnId
+            // const taskId = action.payload.taskId
+            // const board = state.boards.filter(b => {
+            //     return b.id === boardId
+            // })
+            // if (board.length > 0) {
+
+            //     // find col
+            //     const column = board[0].boardColumns.filter(col => {
+            //         return col.id === columnId
+            //     })
+
+            //     if (column.length > 0) {
+
+            //         const task = column[0].tasks.filter(t => {
+            //             return t.id === taskId
+            //         })
+            //         if (task.length > 0) {
+            //             state.selectedTask = task[0]
+            //         }
+            //     }
+            // }
+            state.selectedTask = action.payload.task
+        },
+        hideTask(state, action) {
+            state.selectedTask = null
+        },
+        toggleTaskCompleted(state, action) {
+            const columnId = action.payload.columnId
+            const taskId = action.payload.taskId
+            const subtaskId = action.payload.subtaskId
+            const board = state.boards.filter(b => {
+                return b.id === state.selectedBoard
+            })
+            if (board.length > 0) {
+
+                // find col
+                const column = board[0].boardColumns.filter(col => {
+                    return col.id === columnId
+                })
+
+                if (column.length > 0) {
+
+                    const task = column[0].tasks.filter(t => {
+                        return t.id === taskId
+                    })
+                    if (task.length > 0) {
+                        const subtask = state.selectedTask.subtasks.filter(st => {
+                            return st.id === subtaskId
+                        })
+
+                        if (subtask.length > 0) {
+                            state
+                                .boards[state.selectedBoard]
+                                .boardColumns[columnId]
+                                .tasks[taskId]
+                                .subtasks[subtaskId] = {
+                                ...state
+                                    .boards[state.selectedBoard]
+                                    .boardColumns[columnId]
+                                    .tasks[taskId]
+                                    .subtasks[subtaskId],
+                                completed: !state
+                                    .boards[state.selectedBoard]
+                                    .boardColumns[columnId]
+                                    .tasks[taskId]
+                                    .subtasks[subtaskId].completed
+                            }
+                            state.selectedTask.completed = !state
+                                .boards[state.selectedBoard]
+                                .boardColumns[columnId]
+                                .tasks[taskId]
+                                .subtasks[subtaskId].completed
+                        }
+                    }
                 }
             }
         }
