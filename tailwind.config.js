@@ -22,9 +22,9 @@ module.exports = {
         purplePrimary: '#635FC7',
         purpleLight: 'rgba(171,169,221,0.16)',
         hoverPurple: '#A8A4FF',
-        darkBluePrimary: 'hsl(228, 39%, 23%)',
+        darkBluePrimary: '#2B2C37',
         mediumGrey: 'hsl(227, 12%, 61%)',
-        veryDarkBlue: 'hsl(233, 12%, 13%)',
+        veryDarkBlue: '#20212C',
         varyLightGray: 'hsl(0, 0%, 98%)'
       }
 

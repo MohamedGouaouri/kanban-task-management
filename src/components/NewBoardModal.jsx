@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { createBoard } from "../redux/models/Board";
 import { uiActions } from "../redux/store/ui-slice";
 
 const NewBoardModal = () => {
@@ -8,9 +9,14 @@ const NewBoardModal = () => {
 
     const handleCreateNewBoard = () => {
         if (boardName === "") return
-        dispatch(uiActions.addBoard({
-            name: boardName
+        // dispatch(uiActions.addBoard({
+        //     name: boardName
+        // }))
+
+        dispatch(createBoard({
+            boardName: boardName
         }))
+
         dispatch(uiActions.hideBoardModal())
     }
 

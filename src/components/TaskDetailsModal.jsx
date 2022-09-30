@@ -15,6 +15,7 @@ const TaskDetailsModal = ({ task }) => {
         onClick={(e) => {
             e.stopPropagation()
             dispatch(uiActions.hideTask())
+
         }}
     >
         <div className="w-[500px] min-h-max bg-white m-auto rounded-lg" onClick={(e) => {

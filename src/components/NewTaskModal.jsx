@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createTask } from "../redux/models/Task";
+import { boardsSelector, taskGroupsSelector } from "../redux/orm";
 import { uiActions } from "../redux/store/ui-slice";
 
 const NewTaskModal = () => {
-    const selectedBoardId = useSelector(state => state.ui.selectedBoard)
-    const columns = useSelector(state => {
-        const board = state.ui.boards.filter(b => {
-            return b.id === selectedBoardId
+    const selectedBoard = useSelector(state => state.ui.selectedBoard)
+    const taskGroups = useSelector(state => {
+        const tgs = taskGroupsSelector(state)
+        return tgs.filter(tg => {
+            return tg.boardId === selectedBoard
         })
-        if (board) {
-            return board[0].boardColumns
-        }
-        return null
     })
     const dispatch = useDispatch()
     const [taskName, setTaskName] = useState("")
@@ -19,21 +18,19 @@ const NewTaskModal = () => {
     const [selectedColumn, setColumn] = useState(null)
     const [subtasks, setSubtasks] = useState([])
 
-    const handleCreateNewBoard = () => {
+    const handleCreateNewTask = () => {
         if (taskName === "") return
-        dispatch(uiActions.addTask({
-            boardId: selectedBoardId,
-            columnId: selectedColumn || 0, // TODO: Change this,
+        dispatch(createTask({
             title: taskName,
-            description: description,
-            subtasks: subtasks
+            taskDescription: taskName,
+            completed: false,
+            groupId: selectedColumn
         }))
         dispatch(uiActions.hideTaskModal())
 
     }
     const handleSelectColumn = (e) => {
         setColumn(parseInt(e.target.value))
-
     }
 
     const handleAddSubtask = (e) => {
@@ -77,31 +74,15 @@ const NewTaskModal = () => {
 
 
                 <label htmlFor="subtasks" className="mt-5 mb-2 text-sm text-mediumGrey font-semibold">Subtasks</label>
-                {subtasks.map((st, idx) => {
+                {/* {subtasks.map((st, idx) => {
                     return <input
                         placeholder={`e.g Sub${idx + 1}`}
                         key={idx}
-                        onChange={(e) => {
-                            // Filter subtask
-                            let subtask = subtasks.filter(st => {
-                                return st.id === idx
-                            })
-                            if (subtask) {
-                                subtask = subtask[0]
-                                subtask.title = e.target.value
-                                setSubtasks(subtasks.map(st => {
-                                    if (st.id === subtask.id) {
-                                        return subtask
-                                    }
-                                    return st
-                                }))
-                            }
-                        }}
                         className="mb-5 peer px-4 py-2 text-black dark:text-white dark:bg-mediumGrey text-sm rounded transition-colors outline outline-1 outline-mediumGrey/25 cursor-pointer hover:outline-purplePrimary focus:outline-purplePrimary placeholder:text-black/25 dark:placeholder:text-white/25" />
-                })}
+                })} */}
                 <div className="flex flex-col justify-between gap-5">
                     <div
-                        onClick={handleAddSubtask}
+                        // onClick={handleAddSubtask}
                         className="rounded-full bg-purpleLight py-2 px-4 text-center text-purplePrimary font-semibold text-sm cursor-pointer hover:bg-hoverPurple hover:text-white">
                         + Add New Subtask
                     </div>
@@ -112,13 +93,13 @@ const NewTaskModal = () => {
                             value={selectedColumn}
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Choose a column</option>
-                            {columns && columns.map((col, idx) => {
-                                return <option value={col.id} key={idx}>{col.type}</option>
+                            {taskGroups && taskGroups.map((col, idx) => {
+                                return <option value={col.id} key={idx}>{col.title}</option>
                             })}
                         </select>
                     </div>
                     <div
-                        onClick={handleCreateNewBoard}
+                        onClick={handleCreateNewTask}
                         className="rounded-full bg-purplePrimary py-2 px-4 text-center text-white font-semibold text-sm cursor-pointer hover:bg-hoverPurple">
                         Create New Task
                     </div>

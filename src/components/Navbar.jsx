@@ -1,18 +1,22 @@
+import clsx from "clsx";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import logo from '../assets/images/logo-dark.8590e096.svg'
 import { uiActions } from "../redux/store/ui-slice";
 import ThreeDotsIcon from "./icons/ThreeDotsIcon";
 
 
 const Navbar = () => {
+
+    const theme = useSelector(state => state.ui.theme)
     const dispatch = useDispatch()
 
     const handleCreateTask = () => {
         dispatch(uiActions.showCreateTaskModal())
     }
 
-    return <header className="flex w-full items-center top-0 left-0 sm:pr-4 bg-white dark:bg-veryDarkBlue h-24">
+    const cls = clsx("sticky flex w-full items-center top-0 left-0 sm:pr-4  dark:bg-veryDarkBlue h-24", theme === 'light' ? "bg-white" : "bg-darkBluePrimary")
+    return <header className={cls}>
         <div className={"hidden items-center sm:flex pl-6 h-20 border-r border-r-lines-light dark:border-r-lines-dark md:h-24 min-w-[256px] lg:min-w-[300px]"}>
             <img src={logo} alt={"logo"} />
         </div>

@@ -1,30 +1,25 @@
 import clsx from "clsx";
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import TaskDetailsModal from "../TaskDetailsModal";
+import { tasksSelector } from "../../redux/orm";
 import Task from "./Task";
-const randomColor = require('randomcolor');
 
-const BoardFlow = ({ boardId, columnId }) => {
-    const board = useSelector(state => {
-        return state.ui.boards.filter(board => {
-            return board.id === boardId
-        })
+const BoardFlow = ({ taskGroup }) => {
+
+    const tasks = useSelector(state => tasksSelector(state))
+    const filteredTasks = tasks.filter(t => {
+        return t.groupId === taskGroup.id
     })
-
-    const column = board.length >= 0 && board[0].boardColumns.filter(col => {
-        return col.id === columnId
-    })
-
+    console.log("TASKS", filteredTasks)
     return <section
         className="w-[300px] box-content"
     >
         <div className="flex items-center mb-6 gap-2 ">
-            <div className={clsx("rounded-full h-5 w-5", `bg-[${column && column[0].color}]`)} ></div>
-            <div>{column && column[0].type}</div>
+            <div className={clsx("rounded-full h-5 w-5", `bg-[${taskGroup.color}]`)} ></div>
+            <div className="font-semibold text-mediumGrey">{taskGroup.title}</div>
         </div>
         <div className="flex flex-col gap-5">
-            {column && column[0].tasks.map(task => {
+            {filteredTasks && filteredTasks.map(task => {
                 return <Task task={task} />
             })}
         </div>
