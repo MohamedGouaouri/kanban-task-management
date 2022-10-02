@@ -8,17 +8,14 @@ import { boardsSelector } from '../redux/orm';
 import SunIcon from './icons/SunIcon';
 import Toggle from './Toggle';
 import MoonIcon from './icons/MoonIcon';
-// import ShowSidebar from './ShowSidebar';
 
 const Sidebar = ({ className, visible, toggle }) => {
     const dispatch = useDispatch()
     const boards = useSelector(state => boardsSelector(state))
     const selectedBoard = useSelector(state => state.ui.selectedBoard)
-    // const sidebarShowed = useSelector(state => state.ui.sidebarShowed)
 
 
     const handleCreateBoard = () => {
-        // dispatch(uiActions.addBoard())
         dispatch(uiActions.showCreateBoardModal())
     }
 
@@ -27,7 +24,13 @@ const Sidebar = ({ className, visible, toggle }) => {
         <p className={"text-mediumGrey px-6 py-4 font-bold text-sm"}>ALL BOARDS ({boards.length})</p>
 
         {boards.map((board, idx) => {
-            return <div className={clsx("flex items-center gap-4 w-11/12 rounded-r-full px-6 py-3 cursor-pointer text-white font-bold", selectedBoard === idx ? "bg-purplePrimary hover:bg-hoverPurple" : "text-mediumGrey hover:bg-purpleLight hover:text-purplePrimary")}>
+            return <div
+                onClick={() => {
+                    dispatch(uiActions.setBoard({
+                        id: idx
+                    }))
+                }}
+                className={clsx("flex items-center gap-4 w-11/12 rounded-r-full px-6 py-3 cursor-pointer font-bold", selectedBoard === idx ? "text-white bg-purplePrimary hover:bg-hoverPurple" : "text-mediumGrey hover:bg-purpleLight hover:text-purplePrimary")}>
                 <DashboardIcon color={selectedBoard === idx ? "#fff" : "hsl(227, 12%, 61%)"} />
                 {board.boardName}
             </div>

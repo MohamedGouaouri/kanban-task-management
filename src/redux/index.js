@@ -18,13 +18,6 @@ store.dispatch(createBoard({
     boardDescription: "test",
 }))
 
-store.dispatch(createTaskGroup({
-    id: 0,
-    boardId: 0,
-    title: "Todo",
-    color: "#efedfe"
-}))
-
 
 
 export default store

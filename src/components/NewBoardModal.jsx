@@ -38,18 +38,18 @@ const NewBoardModal = () => {
                     console.log(boardName)
                 }} placeholder="e.g Web Design" className="mb-5 peer px-4 py-2 text-black dark:text-white dark:bg-mediumGrey text-sm rounded transition-colors outline outline-1 outline-mediumGrey/25 cursor-pointer hover:outline-purplePrimary focus:outline-purplePrimary placeholder:text-black/25 dark:placeholder:text-white/25" />
 
-                {/* TODO: Retreive board columns from store */}
+                {/* TODO: Retreive board columns from store
                 <label htmlFor="board-cols" className="mt-5 mb-2 text-sm text-mediumGrey font-semibold">Board Columns</label>
                 <input id="board-cols" placeholder="e.g Todo" className=" mb-5 peer px-4 py-2 text-black dark:text-white dark:bg-mediumGrey text-sm rounded transition-colors outline outline-1 outline-mediumGrey/25 cursor-pointer hover:outline-purplePrimary focus:outline-purplePrimary placeholder:text-black/25 dark:placeholder:text-white/25" />
 
                 <input id="board-cols" placeholder="e.g Doing" className="mb-5 peer px-4 py-2 text-black dark:text-white dark:bg-mediumGrey text-sm rounded transition-colors outline outline-1 outline-mediumGrey/25 cursor-pointer hover:outline-purplePrimary focus:outline-purplePrimary placeholder:text-black/25 dark:placeholder:text-white/25" />
 
-                <input id="board-cols" placeholder="e.g Done" className="mb-5 peer px-4 py-2 text-black dark:text-white dark:bg-mediumGrey text-sm rounded transition-colors outline outline-1 outline-mediumGrey/25 cursor-pointer hover:outline-purplePrimary focus:outline-purplePrimary placeholder:text-black/25 dark:placeholder:text-white/25" />
+                <input id="board-cols" placeholder="e.g Done" className="mb-5 peer px-4 py-2 text-black dark:text-white dark:bg-mediumGrey text-sm rounded transition-colors outline outline-1 outline-mediumGrey/25 cursor-pointer hover:outline-purplePrimary focus:outline-purplePrimary placeholder:text-black/25 dark:placeholder:text-white/25" /> */}
 
                 <div className="flex flex-col justify-between gap-5">
-                    <div className="rounded-full bg-purpleLight py-2 px-4 text-center text-purplePrimary font-semibold text-sm cursor-pointer hover:bg-hoverPurple hover:text-white">
+                    {/* <div className="rounded-full bg-purpleLight py-2 px-4 text-center text-purplePrimary font-semibold text-sm cursor-pointer hover:bg-hoverPurple hover:text-white">
                         + Add New Colmun
-                    </div>
+                    </div> */}
                     <div
                         onClick={handleCreateNewBoard}
                         className="rounded-full bg-purplePrimary py-2 px-4 text-center text-white font-semibold text-sm cursor-pointer hover:bg-hoverPurple">

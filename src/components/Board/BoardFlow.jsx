@@ -10,12 +10,11 @@ const BoardFlow = ({ taskGroup }) => {
     const filteredTasks = tasks.filter(t => {
         return t.groupId === taskGroup.id
     })
-    console.log("TASKS", filteredTasks)
     return <section
         className="w-[300px] box-content"
     >
         <div className="flex items-center mb-6 gap-2 ">
-            <div className={clsx("rounded-full h-5 w-5", `bg-[${taskGroup.color}]`)} ></div>
+            <div className={clsx("rounded-full h-5 w-5", `${taskGroup.color}`)} ></div>
             <div className="font-semibold text-mediumGrey">{taskGroup.title}</div>
         </div>
         <div className="flex flex-col gap-5">

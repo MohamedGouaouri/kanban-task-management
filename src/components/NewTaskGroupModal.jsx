@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createTaskGroup } from "../redux/models/TaskGroup";
 import { uiActions } from "../redux/store/ui-slice";
+import choose from "../utils/choose";
+
+const colors = ["bg-[#e85133]", "bg-[#e8c733]", "bg-[#78e833]", "bg-[#33e86c]", 'bg-[#336fe8]', 'bg-[#6333e8]', 'bg-[#c433e8]', 'bg-[#e83391]', 'bg-[black]']
 
 const NewTaskGroupModal = () => {
     const selectedBoard = useSelector(state => state.ui.selectedBoard)
@@ -14,6 +17,7 @@ const NewTaskGroupModal = () => {
         dispatch(createTaskGroup({
             boardId: selectedBoard,
             title: name,
+            color: choose(colors)
         }))
         dispatch(uiActions.hideTaskGroupeModal())
     }

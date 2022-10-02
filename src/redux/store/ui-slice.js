@@ -10,7 +10,8 @@ const uiSlice = createSlice({
         createTaskGroupModal: false,
         selectedBoard: 0,
         selectedTask: null,
-        theme: 'light'
+        theme: 'light',
+        // colors: ["#e85133", "#e8c733", "#78e833", "#33e86c", "#336fe8", "#6333e8", '#c433e8', '#e83391', '#000']
     },
     reducers: {
         toggle(state, action) {
@@ -41,6 +42,9 @@ const uiSlice = createSlice({
             } else {
                 state.theme = 'light'
             }
+        },
+        setBoard(state, action) {
+            state.selectedBoard = action.payload.id
         }
     }
 })

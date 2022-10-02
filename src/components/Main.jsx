@@ -2,7 +2,6 @@ import ScrollArea from "@xico2k/react-scroll-area/lib/components/ScrollArea";
 import clsx from "clsx";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createTaskGroup } from "../redux/models/TaskGroup";
 import { taskGroupsSelector } from "../redux/orm";
 import { uiActions } from "../redux/store/ui-slice";
 import BoardFlow from "./Board/BoardFlow";
