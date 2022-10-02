@@ -28,20 +28,18 @@ const Main = () => {
         className={cls}
     >
         <div className="mx-auto w-full pt-6 pb-24 px-2">
-            <ScrollArea >
-                <div className="flex gap-8 ">
-                    {taskGroups && taskGroups.map((tg, idx) => {
-                        return <BoardFlow taskGroup={tg} />
-                    })}
-                    <button
-                        className="text-mediumGrey font-semibold cursor-pointer p-2 rounded-md m-0 w-fit h-fit hover:bg-purpleLight"
-                        onClick={handleAddColumn}
-                    >
-                        + Add column
-                    </button>
+            <div className="flex gap-8 ">
+                {taskGroups && taskGroups.map((tg, idx) => {
+                    return <BoardFlow taskGroup={tg} />
+                })}
+                <button
+                    className="text-mediumGrey font-semibold cursor-pointer p-2 rounded-md m-0 w-fit h-fit hover:bg-purpleLight"
+                    onClick={handleAddColumn}
+                >
+                    + Add column
+                </button>
 
-                </div>
-            </ScrollArea>
+            </div>
         </div>
         {/* <ReactDragscroll>
 
